@@ -1,5 +1,5 @@
 /*!
- * kcRotateDial - Simple JavaScript slider
+ * kcRotateDial
  * Copyright (c) 2006 - 2025, KaisarCode <kaisar@kaisarcode.com>
  *
  * This program is free software: you can redistribute it and/or modify
