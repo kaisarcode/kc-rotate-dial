@@ -12,7 +12,7 @@ It is now updated for modern times.
 
 ## Demo
 
-http://kaisarcode.com/resources/demos/kc-rotate-dial/index.html
+http://kaisarcode.com/resources/demos/kc-rotate-dial/demo.html
 
 ## Features
 
