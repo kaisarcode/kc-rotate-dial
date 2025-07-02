@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>kcRotateDial Demo - Multiple Dials</title>
+  <script src="kc-rotate-dial.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 40px;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .dial-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .dial {
+      width: 120px;
+      height: 120px;
+      background: #3498db;
+      border-radius: 50%;
+      position: relative;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s;
+    }
+    .dial:active {
+      cursor: grabbing;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .indicator {
+      position: absolute;
+      width: 4px;
+      height: 50px;
+      background: white;
+      top: 15px;
+      left: 50%;
+      transform-origin: bottom center;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+      max-width: 140px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dial-container">
+    <div class="dial" id="dial1">
+      <div class="indicator"></div>
+    </div>
+    <div class="label">Default (no step, no inertia)</div>
+  </div>
+
+  <div class="dial-container">
+    <div class="dial" id="dial2" style="background:#e67e22;">
+      <div class="indicator"></div>
+    </div>
+    <div class="label">Step = 30°, no inertia</div>
+  </div>
+
+  <div class="dial-container">
+    <div class="dial" id="dial3" style="background:#2ecc71;">
+      <div class="indicator"></div>
+    </div>
+    <div class="label">Step = 15°, inertia on</div>
+  </div>
+
+  <div class="dial-container">
+    <div class="dial" id="dial4" style="background:#9b59b6;">
+      <div class="indicator"></div>
+    </div>
+    <div class="label">Easing only, no inertia, step 45°</div>
+  </div>
+
+  <div class="dial-container">
+    <div class="dial" id="dial5" style="background:#34495e;">
+      <div class="indicator"></div>
+    </div>
+    <div class="label">No step, inertia enabled</div>
+  </div>
+
+  <script>
+    function initDial(elemId, config) {
+      const dialElem = document.getElementById(elemId);
+      const indicator = dialElem.querySelector('.indicator');
+
+      const dial = new KcRotateDial(dialElem, config);
+
+      dial.onchange = () => {
+        indicator.style.transform = `rotate(${dial.deg}deg)`;
+      };
+
+      dial.onstep = (stepVal) => {
+        // optional: console.log(elemId + ' step:', stepVal);
+      };
+
+      return dial;
+    }
+
+    const dial1 = initDial('dial1', {
+      easing: false,
+      inertia: false,
+      step: 0
+    });
+
+    const dial2 = initDial('dial2', {
+      easing: false,
+      inertia: false,
+      step: 30
+    });
+
+    const dial3 = initDial('dial3', {
+      easing: false,
+      inertia: true,
+      inertiaFriction: 0.9,
+      step: 15
+    });
+
+    const dial4 = initDial('dial4', {
+      easing: true,
+      inertia: false,
+      step: 45
+    });
+
+    const dial5 = initDial('dial5', {
+      easing: false,
+      inertia: true,
+      step: 0
+    });
+  </script>
+
+</body>
+</html>
