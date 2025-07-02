@@ -67,35 +67,28 @@
     <div class="dial" id="dial1">
       <div class="indicator"></div>
     </div>
-    <div class="label">Default (no step, no inertia)</div>
+    <div class="label">Set 90°, Step 0°, no easing, no inertia</div>
   </div>
 
   <div class="dial-container">
     <div class="dial" id="dial2" style="background:#e67e22;">
       <div class="indicator"></div>
     </div>
-    <div class="label">Step = 30°, no inertia</div>
+    <div class="label">Set 90°, Step 0°, easing, no inertia</div>
   </div>
 
   <div class="dial-container">
     <div class="dial" id="dial3" style="background:#2ecc71;">
       <div class="indicator"></div>
     </div>
-    <div class="label">Step = 15°, inertia on</div>
+    <div class="label">Set 45°, Step 0°, easing, inertia</div>
   </div>
 
   <div class="dial-container">
     <div class="dial" id="dial4" style="background:#9b59b6;">
       <div class="indicator"></div>
     </div>
-    <div class="label">Easing only, no inertia, step 45°</div>
-  </div>
-
-  <div class="dial-container">
-    <div class="dial" id="dial5" style="background:#34495e;">
-      <div class="indicator"></div>
-    </div>
-    <div class="label">No step, inertia enabled</div>
+    <div class="label">Set 180°, Step 30°, easing, no inertia</div>
   </div>
 
   <script>
@@ -110,7 +103,7 @@
       };
 
       dial.onstep = (stepVal) => {
-        // optional: console.log(elemId + ' step:', stepVal);
+        console.log(elemId + ' step:', stepVal);
       };
 
       return dial;
@@ -121,31 +114,30 @@
       inertia: false,
       step: 0
     });
+    dial1.setValue(90);
 
     const dial2 = initDial('dial2', {
-      easing: false,
+      easing: true,
       inertia: false,
-      step: 30
+      step: 0
     });
+    dial2.setValue(90);
 
     const dial3 = initDial('dial3', {
-      easing: false,
+      easing: true,
       inertia: true,
       inertiaFriction: 0.9,
-      step: 15
+      step: 0
     });
+    dial3.setValue(45);
 
     const dial4 = initDial('dial4', {
       easing: true,
       inertia: false,
-      step: 45
+      step: 30
     });
+    dial4.setValue(180);
 
-    const dial5 = initDial('dial5', {
-      easing: false,
-      inertia: true,
-      step: 0
-    });
   </script>
 
 </body>

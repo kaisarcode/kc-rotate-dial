@@ -1,21 +1,3 @@
-/*!
- * kcRotateDial
- * Copyright (c) 2006 - 2025, KaisarCode <kaisar@kaisarcode.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
 class KcRotateDial {
     constructor(elem, config = {}) {
         this.elem = elem;
@@ -47,7 +29,7 @@ class KcRotateDial {
         this.easing = config.easing || false;
         this.step = config.step || 0;
         this.inertia = config.inertia || false;
-        this.inertiaFriction = config.inertiaFriction || 0.95;
+        this.inertiaFriction = config.inertiaFriction || 0.9;
 
         this.onchange = () => {};
         this.onstep = () => {};
@@ -155,7 +137,8 @@ class KcRotateDial {
     }
 
     setValue(deg) {
-        const targetRad = (deg / this.maxDeg) * this.maxRad;
+        const correctedDeg = deg/2;
+        const targetRad = (correctedDeg / this.maxDeg) * this.maxRad;
 
         if (this.easing) {
             const startRad = this.rad;
