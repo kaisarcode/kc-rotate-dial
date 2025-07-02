@@ -93,19 +93,8 @@
 
   <script>
     function initDial(elemId, config) {
-      const dialElem = document.getElementById(elemId);
-      const indicator = dialElem.querySelector('.indicator');
-
-      const dial = new KcRotateDial(dialElem, config);
-
-      dial.onchange = () => {
-        indicator.style.transform = `rotate(${dial.deg}deg)`;
-      };
-
-      dial.onstep = (stepVal) => {
-        console.log(elemId + ' step:', stepVal);
-      };
-
+      const elm = document.getElementById(elemId);
+      const dial = new KcRotateDial(elm, config);
       return dial;
     }
 
@@ -136,7 +125,11 @@
       inertia: false,
       step: 30
     });
+    dial4.onstep = (stepVal) => {
+      console.log(this + ' step:', stepVal);
+    };
     dial4.setValue(180);
+
 
   </script>
 
