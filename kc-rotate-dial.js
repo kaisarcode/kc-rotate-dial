@@ -1,3 +1,22 @@
+/**
+ * KcRotateDial - A custom rotatable dial component.
+ *
+ * Copyright (c) 2025, KaisarCode <kaisar@kaisarcode.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 class KcRotateDial {
     constructor(elem, config = {}) {
         this.elem = elem;
@@ -45,7 +64,7 @@ class KcRotateDial {
         document.addEventListener('mousemove', e => this.rotate(e));
         document.addEventListener('touchstart', e => this.setDrag(e, true));
         document.addEventListener('touchend', e => this.setDrag(e, false));
-        document.addEventListener('touchmove', e => this.rotate(e));
+        document.addEventListener('touchmove', e => this.rotate(e), { passive: false });
     }
 
     getAxis() {
@@ -85,6 +104,8 @@ class KcRotateDial {
 
     rotate(e) {
         if (!this.drag) return;
+        if (e.cancelable) e.preventDefault();
+
         const now = performance.now();
         const angle = this.getAngle(e);
         const relative = angle - this.radInternal;
@@ -137,7 +158,7 @@ class KcRotateDial {
     }
 
     setValue(deg) {
-        const correctedDeg = deg/2;
+        const correctedDeg = deg / 2;
         const targetRad = (correctedDeg / this.maxDeg) * this.maxRad;
 
         if (this.easing) {
