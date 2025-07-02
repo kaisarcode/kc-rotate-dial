@@ -4,9 +4,11 @@ A lightweight, vanilla JavaScript rotary dial control with smooth dragging, iner
 
 ## Description
 
-kcRotateDial is a pure JavaScript rotary dial component created originally in 2006 and actively maintained through 2025. It allows users to click or drag to rotate an element smoothly, supports inertia for natural motion, easing animations for setting values programmatically, and optional snapping to steps.
+kcRotateDial is a pure JavaScript rotary dial component, originally created around the year 2010. It allows users to click or drag to rotate an element smoothly, supports inertia for natural motion, easing animations for programmatic value setting, and optional step snapping.
 
 This control was pioneering for its time, inspiring other developers and projects long before similar solutions existed.
+
+It is now updated for modern times.
 
 ## Features
 
