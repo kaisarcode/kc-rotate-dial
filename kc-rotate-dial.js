@@ -1,7 +1,6 @@
 /**
- * KcRotateDial - A custom rotatable dial component.
- *
- * Copyright (c) 2025, KaisarCode <kaisar@kaisarcode.com>
+ * kcRotateDial
+ * Copyright (c) 2006 - 2025, KaisarCode <kaisar@kaisarcode.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +61,8 @@ class KcRotateDial {
         this.elem.addEventListener('mousedown', e => this.setDrag(e, true));
         document.addEventListener('mouseup', e => this.setDrag(e, false));
         document.addEventListener('mousemove', e => this.rotate(e));
-        document.addEventListener('touchstart', e => this.setDrag(e, true));
+
+        this.elem.addEventListener('touchstart', e => this.setDrag(e, true), { passive: false });
         document.addEventListener('touchend', e => this.setDrag(e, false));
         document.addEventListener('touchmove', e => this.rotate(e), { passive: false });
     }
@@ -104,8 +104,7 @@ class KcRotateDial {
 
     rotate(e) {
         if (!this.drag) return;
-        if (e.cancelable) e.preventDefault();
-
+        e.preventDefault();
         const now = performance.now();
         const angle = this.getAngle(e);
         const relative = angle - this.radInternal;
@@ -158,8 +157,7 @@ class KcRotateDial {
     }
 
     setValue(deg) {
-        const correctedDeg = deg / 2;
-        const targetRad = (correctedDeg / this.maxDeg) * this.maxRad;
+        const targetRad = (deg / this.maxDeg) * this.maxRad;
 
         if (this.easing) {
             const startRad = this.rad;
